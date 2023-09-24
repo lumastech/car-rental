@@ -12,7 +12,9 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        // Get all bookings with pagination
+        $bookings = Booking::paginate(10);
+        return view('bookings.index', compact('bookings'));
     }
 
     /**
@@ -20,7 +22,8 @@ class BookingController extends Controller
      */
     public function create()
     {
-        //
+        // Return the view for creating a new booking
+        return view('bookings.create');
     }
 
     /**
@@ -28,7 +31,25 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request
+        $request->validate([
+            'user_id' => 'required|integer',
+            'car_id' => 'required|integer',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ]);
+
+        // Create a new booking
+        Booking::create([
+            'user_id' => $request->user_id,
+            'car_id' => $request->car_id,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'total_cost' => 0,
+        ]);
+
+        // Redirect to the bookings index page
+        return redirect()->route('bookings.index');
     }
 
     /**
@@ -36,7 +57,8 @@ class BookingController extends Controller
      */
     public function show(Booking $booking)
     {
-        //
+        // show the booking details
+        return view('bookings.show', compact('booking'));
     }
 
     /**
@@ -44,7 +66,8 @@ class BookingController extends Controller
      */
     public function edit(Booking $booking)
     {
-        //
+        // edit the booking
+        return view('bookings.edit', compact('booking'));
     }
 
     /**
@@ -52,7 +75,22 @@ class BookingController extends Controller
      */
     public function update(Request $request, Booking $booking)
     {
-        //
+        // Validate the request
+        $request->validate([
+            'car_id' => 'required|integer',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ]);
+
+        // Update the booking
+        $booking->update([
+            'car_id' => $request->car_id,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
+
+        // Redirect to the bookings index page
+        return redirect()->route('bookings.index')->with('success', 'Booking updated successfully');
     }
 
     /**
@@ -60,6 +98,11 @@ class BookingController extends Controller
      */
     public function destroy(Booking $booking)
     {
-        //
+        // delete the booking
+        if ($booking->delete()) {
+            return redirect()->route('bookings.index');
+        }
+
+        return back()->with('errors', 'Error deleting the booking');
     }
 }
