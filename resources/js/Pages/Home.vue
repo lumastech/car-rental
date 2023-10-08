@@ -36,41 +36,7 @@
             </div>
             <div class="main-content flex-auto">
                 <header class="header-h pb-24 pt-2">
-                    <nav class="nav bg-gray-100/50 rounded py-2 px-4 flex max-w-7xl mx-auto">
-                        <!-- logo -->
-                        <div class="flex-auto">
-                            <a href="/">
-                                <img src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="logo" class="w-9 h-9 mr-4" />
-                            </a>
-                        </div>
-                        <ul class="self-center hidden md:flex">
-                            <li class="mr-6">
-                                <Link href="/">Home</Link>
-                            </li>
-                            <li class="mr-6">
-                                <Link href="/about">About</Link>
-                            </li>
-                            <li class="mr-6">
-                                <Link href="/contact">Contact</Link>
-                            </li>
-                            <!-- LOGIN -->
-                            <li class="mr-6">
-                                <Link href="/login">Login</Link>
-                            </li>
-                            <!-- REGISTER -->
-                            <li class="mr-6">
-                                <Link href="/register">Register</Link>
-                            </li>
-                        </ul>
-                        <button class="toggle md:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <line x1="4" y1="6" x2="20" y2="6" />
-                                <line x1="4" y1="12" x2="20" y2="12" />
-                                <line x1="4" y1="18" x2="20" y2="18" />
-                            </svg>
-                        </button>
-                    </nav>
+                    <Navbar />
                     <div class="max-w-7xl mx-auto">
                         <form action="#" class="shadow bg-white/80 rounded-md px-4 pt-4 my-16">
                             <h1 class="text-4xl text-primary px-4">Search And Compare</h1>
@@ -100,7 +66,7 @@
                         <h1 class="text-primary text-xl mb-4">Availlable cars</h1>
                         <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4">
                             <div v-for="i in 10" :key="i" class="shadow rounded overflow-hidden hover:bg-primary-100 hover:shadow-xl transition">
-                                <img src="../../assets/images/car1.jpg" alt="car" class="aspect-video w-full">
+                                <img src="../../assets/cars/car1.jpg" alt="car" class="aspect-video w-full">
                                 <div class="px-2">
                                     <h1 class="text-primary text-xl font-bold">Toyota</h1>
                                     <p class="text-gray-400 text-sm"><i class="fas fa-location"></i> Kabulonga</p>
@@ -122,16 +88,21 @@
             </div>
         </div>
     </div>
+    <Footer />
 </template>
 
 <script>
-    import { Link, Head } from '@inertiajs/vue3';
+    import Footer from '@/Components/Footer.vue';
+import Navbar from '@/Components/Navbar.vue';
+import { Link, Head } from '@inertiajs/vue3';
     import {Datetimepicker, Input, initTE,} from "tw-elements";
 
     export default {
         components: {
-            Link, Head, Datetimepicker, Input
-        },
+    Link, Head, Datetimepicker, Input,
+    Footer,
+    Navbar
+},
     }
 </script>
 

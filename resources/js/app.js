@@ -8,7 +8,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { Datepicker, Input, initTE } from "tw-elements";
 initTE({ Datepicker, Input });
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'Car Rental';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
